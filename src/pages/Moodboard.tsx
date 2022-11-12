@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import "./Moodboard.scss";
 import { useLocation } from "react-router-dom";
 import Button from "../components/Button";
+import ImageCard from "../components/ImageCard";
 
 function Moodboard (){
     const location = useLocation();
@@ -26,15 +27,45 @@ function Moodboard (){
         })
     }, [location.state.keywords])
 
+    let removeFromArray = (url: string) => {
+        let newImages = [...images]
+        const index = newImages.indexOf(url)
+        if (index > -1) {
+            newImages.splice(index, 1)
+        }
+        setImages(newImages)
+        console.log(newImages)
+    }
+
+    let saveAndtrain = () => {
+        fetch("http://localhost:5000/save", {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+              },
+            body: JSON.stringify(images.slice(0,5))
+        })
+        .then(res => { 
+            navigate("/")
+            if(res.status === 200){
+                alert("Model trained!")
+            }
+        })
+    }
+
     return(
         <div className="moodboardContainer">
-            <div className="imagesContainer">
-                {images.map((image, id) => {
-                    return <img alt={image} key={id} src={image}/>
-                })}
-            </div>
+            {images.length > 1 &&
+                <div className="imagesContainer">
+                    {images.slice(0,5).map((image, id) => {
+                        return <ImageCard key={id} url={image} callback={removeFromArray}/>
+                    })}
+                </div>
+            }
+            
             <div className="moodboardBottomControls">
                 <Button title="Home" callback={()=> {navigate("/")}} />
+                <Button title="Save and Train" callback={() => saveAndtrain()}/>
             </div>
         </div>
     );
