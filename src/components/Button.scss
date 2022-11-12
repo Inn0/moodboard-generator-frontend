@@ -1,0 +1,32 @@
+@use '../base';
+
+.buttonContainer {
+    background-color: base.$primary-color;
+    border-radius: 25px;
+    display: flex;
+    justify-content: center;
+    width: fit-content;
+    padding: 10px;
+    user-select: none;
+    cursor: pointer;
+
+    -webkit-box-shadow: 3px 3px 5px -1px rgba(128,128,128,1);
+    -moz-box-shadow: 3px 3px 5px -1px rgba(128,128,128,1);
+    box-shadow: 3px 3px 5px -1px rgba(128,128,128,1);
+
+    &:hover{
+        filter: opacity(0.8);
+        -webkit-box-shadow: none;
+        -moz-box-shadow: none;
+        box-shadow: none;
+    }
+
+    .buttonText {
+        color: white;
+        font-size: 24px;
+        margin-top: auto;
+        margin-bottom: auto;
+        margin-left: 50px;
+        margin-right: 50px;
+    }
+}

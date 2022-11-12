@@ -1,0 +1,28 @@
+.moodboardContainer {
+    display: flex;
+    flex-direction: column;
+
+    .imagesContainer {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        min-height: calc(100vh - 130px);
+
+        img {
+            max-width: 300px;
+            max-height: 300px;
+            width: auto;
+            height: auto;
+            margin: 10px;
+            object-fit: contain;
+        }
+    }
+
+    .moodboardBottomControls {
+        height: 50px;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        margin-left: 10px;
+    }
+}
